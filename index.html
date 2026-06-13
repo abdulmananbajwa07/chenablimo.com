@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Chenab Limo — Premium Car Service Houston TX</title>
 <meta name="description" content="Premium limousine and executive car service in Houston TX. Airport transfers IAH & HOU, corporate travel, weddings, events, Galveston. Call +1 (346) 629-9969.">
 <script type="application/ld+json">
@@ -1119,99 +1122,45 @@ function initForm(form){
   if(!dateInp) return;
 
   const tomorrow=getTomorrow();
-  const today=getToday();
 
-  // Default: tomorrow. Min date = today (today allowed only with 4hr buffer).
-  dateInp.min=today;
+  // Strict 24-hour rule: earliest selectable date is TOMORROW. Same-day = call us.
+  dateInp.min=tomorrow;
   dateInp.value=tomorrow;
-  if(timeInp){ timeInp.min='00:00'; timeInp.value=''; }
+  if(timeInp){ timeInp.value=''; }
 
-  // Warning banner
-  const warn=document.createElement('div');
-  warn.className='sameday-warn';
-  warn.style.cssText='display:none;align-items:center;gap:10px;padding:11px 14px;background:rgba(200,150,74,.07);border:1px solid rgba(200,150,74,.28);border-radius:2px;margin-top:8px';
-  warn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8964a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span style="font-size:11px;color:rgba(200,150,74,.9);letter-spacing:.04em;line-height:1.5">Same-day selected. Earliest pickup: <strong class="minTimeLabel"></strong>. Need sooner? <a href="tel:+13466299969" style="color:#e2b872;text-decoration:none;border-bottom:1px solid rgba(226,184,114,.4)">Call +1 (346) 629-9969</a></span>';
-  dateInp.closest('.fg').appendChild(warn);
+  // Info note under the date field
+  const note=document.createElement('div');
+  note.className='booking-note';
+  note.style.cssText='display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(200,150,74,.07);border:1px solid rgba(200,150,74,.28);border-radius:2px;margin-top:8px';
+  note.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8964a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span style="font-size:11px;color:rgba(200,150,74,.9);letter-spacing:.04em;line-height:1.5">Online bookings require <strong>24 hours notice</strong> (tomorrow onward). Need a ride today? <a href="tel:+13466299969" style="color:#e2b872;text-decoration:none;border-bottom:1px solid rgba(226,184,114,.4)">Call +1 (346) 629-9969</a></span>';
+  dateInp.closest('.fg').appendChild(note);
 
-  // Apply constraints based on currently-selected date (recomputes min time live)
-  function applyConstraints(resetTime){
-    if(!timeInp) return;
-    const val=dateInp.value;
-    if(val===today){
-      const minT=get4hrMinTime();
-      if(minT===null){
-        // Too late for same-day (4hr buffer crosses midnight) — force tomorrow
-        dateInp.value=tomorrow;
-        timeInp.min='00:00';
-        timeInp.value='';
-        warn.style.display='flex';
-        const lbl=warn.querySelector('.minTimeLabel');
-        if(lbl) lbl.textContent='tomorrow (too late for same-day)';
-        return;
-      }
-      timeInp.min=minT;
-      warn.style.display='flex';
-      const lbl=warn.querySelector('.minTimeLabel');
-      if(lbl) lbl.textContent=formatTime(minT);
-      if(resetTime || !timeInp.value || timeInp.value<minT){
-        timeInp.value=minT;
-      }
-    } else {
-      timeInp.min='00:00';
-      warn.style.display='none';
-      if(resetTime) timeInp.value='';
+  // Guard: if anything sets the date to today or earlier, bump it to tomorrow
+  function enforceMinDate(){
+    const tmrw=getTomorrow();
+    dateInp.min=tmrw;
+    if(!dateInp.value || dateInp.value<tmrw){
+      dateInp.value=tmrw;
     }
   }
+  dateInp.addEventListener('change',enforceMinDate);
+  dateInp.addEventListener('input',enforceMinDate);
 
-  // Validate the time field directly (catches manual typing of an early time)
-  function validateTime(){
-    if(!timeInp||!timeInp.value) return;
-    if(dateInp.value===today){
-      const minT=get4hrMinTime();
-      if(minT===null){ dateInp.value=tomorrow; applyConstraints(true); return; }
-      if(timeInp.value<minT){
-        timeInp.setCustomValidity('Earliest same-day pickup is '+formatTime(minT)+' (at least 4 hours from now). For sooner, please call us.');
-        timeInp.value=minT;
-        timeInp.reportValidity();
-        return;
-      }
+  // Final guard on submit
+  form.addEventListener('submit',function(e){
+    const tmrw=getTomorrow();
+    if(!dateInp.value || dateInp.value<tmrw){
+      e.preventDefault();
+      dateInp.value=tmrw;
+      dateInp.setCustomValidity('Online bookings require at least 24 hours notice. Please choose tomorrow or later, or call us for same-day service.');
+      dateInp.reportValidity();
+      return;
     }
-    timeInp.setCustomValidity('');
-  }
-
-  dateInp.addEventListener('change',function(){ applyConstraints(true); });
-  dateInp.addEventListener('input',function(){ applyConstraints(true); });
-  if(timeInp){
-    timeInp.addEventListener('change',validateTime);
-    timeInp.addEventListener('blur',validateTime);
-    timeInp.addEventListener('input',function(){ timeInp.setCustomValidity(''); });
-  }
-
-  // Block form submit if same-day time is too early
-  form.addEventListener('submit', function(e){
-    if(!dateInp.value){ return; }
-    if(dateInp.value===today){
-      const minT=get4hrMinTime();
-      if(minT===null){
-        e.preventDefault();
-        dateInp.value=tomorrow;
-        applyConstraints(true);
-        return;
-      }
-      if(!timeInp.value || timeInp.value<minT){
-        e.preventDefault();
-        timeInp.value=minT;
-        applyConstraints(false);
-        timeInp.setCustomValidity('Earliest same-day pickup is '+formatTime(minT)+' (at least 4 hours from now). For sooner, please call us.');
-        timeInp.reportValidity();
-        return;
-      }
-    }
-    if(timeInp) timeInp.setCustomValidity('');
+    dateInp.setCustomValidity('');
   });
+  dateInp.addEventListener('input',function(){ dateInp.setCustomValidity(''); });
 
-  // Run once on load to set correct state for the default (tomorrow) selection
-  applyConstraints(false);
+  enforceMinDate();
 }
 
 function formatTime(t){
