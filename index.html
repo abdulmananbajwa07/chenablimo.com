@@ -228,6 +228,32 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,8,7,.92);border-bottom:1
 .fleet-cap svg{width:11px;height:11px;stroke:var(--gold);fill:none;stroke-width:2}
 
 /* ── PRICING ── */
+.zone-intro{display:flex;align-items:flex-start;gap:14px;margin-top:-32px;margin-bottom:40px;max-width:620px}
+.zone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.zone-card{border:1px solid rgba(200,150,74,.15);background:var(--dark);padding:40px 32px;position:relative;overflow:hidden;transition:all .3s;text-align:center}
+.zone-card:hover{border-color:rgba(200,150,74,.4);background:var(--dark3);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.zone-card.mid{border-color:rgba(200,150,74,.3);background:linear-gradient(160deg,var(--dark3) 0%,var(--dark) 100%)}
+.zone-letter{width:56px;height:56px;border-radius:50%;border:1px solid var(--gold-line);background:var(--gold-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Cormorant',serif;font-size:26px;font-weight:400;color:var(--gold2)}
+.zone-time{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.zone-name{font-family:'Cormorant',serif;font-size:21px;font-weight:400;color:var(--white);letter-spacing:.03em;margin-bottom:18px}
+.zone-price{display:flex;align-items:baseline;justify-content:center;gap:4px;margin-bottom:6px}
+.zone-price-num{font-family:'Cormorant',serif;font-size:52px;font-weight:400;color:var(--gold2);line-height:1}
+.zone-price-unit{font-size:13px;color:var(--muted)}
+.zone-cap{font-size:12px;color:var(--muted);letter-spacing:.04em;margin-top:8px;padding-top:18px;border-top:1px solid rgba(200,150,74,.1)}
+.zone-cap svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px}
+.zone-airports{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.zone-airport-chip{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:4px 11px;border:1px solid rgba(200,150,74,.18);border-radius:30px}
+.other-pricing{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.op-card{border:1px solid rgba(200,150,74,.12);background:var(--dark2);padding:26px 24px;transition:all .3s}
+.op-card:hover{border-color:rgba(200,150,74,.3);background:var(--dark3)}
+.op-name{font-family:'Cormorant',serif;font-size:17px;font-weight:400;color:var(--white);letter-spacing:.03em;margin-bottom:8px}
+.op-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px;min-height:48px}
+.op-price{font-size:13px;color:var(--gold2);letter-spacing:.04em}
+.op-price strong{font-family:'Cormorant',serif;font-size:22px;font-weight:400}
+.price-note{margin-top:40px;padding:28px 32px;background:var(--dark2);border:1px solid rgba(200,150,74,.12);border-radius:var(--rl);display:flex;align-items:flex-start;gap:16px}
+.price-note svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
+.price-note-text{font-size:13px;color:var(--muted);line-height:1.8;letter-spacing:.02em}
+/* ── PRICING (legacy) ── */
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
 .price-card{border:1px solid rgba(200,150,74,.12);background:var(--dark);padding:36px 30px;position:relative;overflow:hidden;transition:all .3s}
 .price-card:hover{border-color:rgba(200,150,74,.3);background:var(--dark3);transform:translateY(-4px)}
@@ -248,6 +274,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(8,8,7,.92);border-bottom:1
 .price-note svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:2px}
 .price-note-text{font-size:13px;color:var(--muted);line-height:1.8;letter-spacing:.02em}
 .price-note-text strong{color:var(--off)}
+.price-group{margin-top:48px}
+.price-group:first-of-type{margin-top:8px}
+.pg-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.pg-head h3{font-family:'Cormorant',serif;font-size:24px;font-weight:400;color:var(--white);letter-spacing:.04em;white-space:nowrap;margin:0}
+.pg-ico{width:34px;height:34px;border:1px solid var(--gold-line);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--gold-dim)}
+.pg-ico svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pg-rule{flex:1;height:1px;background:linear-gradient(to right,rgba(200,150,74,.25),transparent)}
+.pg-grid{display:grid;gap:14px}
+.pg-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.pg-grid.cols-2{grid-template-columns:repeat(2,1fr)}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:18px;border:1px solid rgba(200,150,74,.12);background:var(--dark2);padding:22px 26px;transition:all .3s}
+.prow:hover{border-color:rgba(200,150,74,.32);background:var(--dark3);transform:translateY(-2px)}
+.prow-left{flex:1}
+.prow-name{font-size:14px;color:var(--white);letter-spacing:.02em;margin-bottom:4px;line-height:1.4}
+.prow-meta{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.prow-price{font-family:'Cormorant',serif;font-size:30px;font-weight:400;color:var(--gold2);line-height:1;white-space:nowrap;text-align:right}
+.prow-price small{font-size:11px;color:var(--muted);letter-spacing:.02em;display:block;text-align:right;margin-top:4px;font-family:'Tenor Sans',sans-serif}
+.prow.feat{border-color:rgba(200,150,74,.3);background:linear-gradient(160deg,var(--dark3) 0%,var(--dark2) 100%)}
 
 /* ── MAP SECTION ── */
 .map-section{padding:104px 8%;background:var(--dark)}
@@ -373,6 +417,10 @@ footer{background:#050504;border-top:1px solid rgba(200,150,74,.08);padding:72px
   .hero-lines::before{display:none}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
   .pricing-grid{grid-template-columns:1fr}
+  .zone-grid{grid-template-columns:1fr}
+  .other-pricing{grid-template-columns:repeat(2,1fr)}
+  .pg-grid.cols-3{grid-template-columns:1fr}
+  .pg-grid.cols-2{grid-template-columns:1fr}
   .why-grid{grid-template-columns:1fr}
   .map-layout{grid-template-columns:1fr}
   .booking-grid{grid-template-columns:1fr}
@@ -388,6 +436,7 @@ footer{background:#050504;border-top:1px solid rgba(200,150,74,.08);padding:72px
 @media(max-width:640px){
   .svc-grid{grid-template-columns:1fr}
   .fleet-grid{grid-template-columns:1fr 1fr}
+  .other-pricing{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   .hero-stats{flex-wrap:wrap;gap:20px}
   .hstat{border:none;padding:0;margin:0}
@@ -690,78 +739,135 @@ footer{background:#050504;border-top:1px solid rgba(200,150,74,.08);padding:72px
     </div>
     <div class="gl-rule"></div>
   </div>
-  <p class="section-body reveal" style="margin-top:-32px;margin-bottom:8px">Starting rates below. Final quote confirmed when you book — based on distance, vehicle, and timing. No hidden fees, no surge pricing.</p>
-  <div class="pricing-grid reveal">
-    <div class="price-card featured">
-      <div class="price-cat">Airport Transfers</div>
-      <div class="price-svc">IAH &amp; HOU Airports</div>
-      <div class="price-desc">One-way transfer to or from either Houston airport. Flight tracking and meet &amp; greet included.</div>
-      <div class="price-amount"><span class="price-from">From</span><span class="price-num">$75</span><span class="price-unit">/ trip</span></div>
-      <div class="price-rows">
-        <div class="price-row"><span class="price-row-label">Luxury Sedan (1–3)</span><span class="price-row-val">from $75</span></div>
-        <div class="price-row"><span class="price-row-label">Luxury SUV (1–6)</span><span class="price-row-val">from $110</span></div>
-        <div class="price-row"><span class="price-row-label">Sprinter Van (7–14)</span><span class="price-row-val">from $160</span></div>
-      </div>
+  <div class="zone-intro reveal">
+    <p class="section-body" style="margin:0">Flat, upfront pricing for every service. No surge pricing, no hidden fees — just honest rates. Exact quote confirmed when you book.</p>
+  </div>
+
+  <!-- AIRPORT ZONES -->
+  <div class="price-group reveal">
+    <div class="pg-head">
+      <div class="pg-ico"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg></div>
+      <h3>Airport Transfers <em style="font-style:italic;color:var(--gold);font-size:18px">(1–6 people)</em></h3>
+      <div class="pg-rule"></div>
     </div>
-    <div class="price-card">
-      <div class="price-cat">Hourly Chauffeur</div>
-      <div class="price-svc">By the Hour</div>
-      <div class="price-desc">A private driver at your disposal. Meetings, events, errands, or a night out — 2 hour minimum.</div>
-      <div class="price-amount"><span class="price-from">From</span><span class="price-num">$85</span><span class="price-unit">/ hour</span></div>
-      <div class="price-rows">
-        <div class="price-row"><span class="price-row-label">Luxury Sedan</span><span class="price-row-val">from $85/hr</span></div>
-        <div class="price-row"><span class="price-row-label">Luxury SUV</span><span class="price-row-val">from $110/hr</span></div>
-        <div class="price-row"><span class="price-row-label">Minimum booking</span><span class="price-row-val">2 hours</span></div>
+    <div class="pg-grid cols-3">
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Zone A — Bush (IAH) or Hobby (HOU)</div><div class="prow-meta">30 minutes or less</div></div>
+        <div class="prow-price">$80<small>per trip</small></div>
       </div>
-    </div>
-    <div class="price-card">
-      <div class="price-cat">Galveston &amp; Cruises</div>
-      <div class="price-svc">Cruise Terminal</div>
-      <div class="price-desc">Door-to-door transfer between Houston and the Port of Galveston cruise terminal.</div>
-      <div class="price-amount"><span class="price-from">From</span><span class="price-num">$140</span><span class="price-unit">/ trip</span></div>
-      <div class="price-rows">
-        <div class="price-row"><span class="price-row-label">Luxury Sedan</span><span class="price-row-val">from $140</span></div>
-        <div class="price-row"><span class="price-row-label">Luxury SUV</span><span class="price-row-val">from $180</span></div>
-        <div class="price-row"><span class="price-row-label">Sprinter Van</span><span class="price-row-val">from $240</span></div>
+      <div class="prow feat">
+        <div class="prow-left"><div class="prow-name">Zone B — Bush (IAH) or Hobby (HOU)</div><div class="prow-meta">31 – 45 minutes</div></div>
+        <div class="prow-price">$105<small>per trip</small></div>
       </div>
-    </div>
-    <div class="price-card">
-      <div class="price-cat">City-to-City</div>
-      <div class="price-svc">Out of Town</div>
-      <div class="price-desc">Private long-distance rides across Texas. Direct, comfortable, no layovers or shared rides.</div>
-      <div class="price-amount"><span class="price-from">From</span><span class="price-num">$275</span><span class="price-unit">/ trip</span></div>
-      <div class="price-rows">
-        <div class="price-row"><span class="price-row-label">Houston → Austin</span><span class="price-row-val">from $275</span></div>
-        <div class="price-row"><span class="price-row-label">Houston → San Antonio</span><span class="price-row-val">from $300</span></div>
-        <div class="price-row"><span class="price-row-label">Houston → Dallas</span><span class="price-row-val">from $375</span></div>
-      </div>
-    </div>
-    <div class="price-card">
-      <div class="price-cat">Weddings &amp; Events</div>
-      <div class="price-svc">Special Occasions</div>
-      <div class="price-desc">Weddings, prom, concerts, rodeo, parties. Custom packages built around your event timeline.</div>
-      <div class="price-amount"><span class="price-from">From</span><span class="price-num">$150</span><span class="price-unit">/ trip</span></div>
-      <div class="price-rows">
-        <div class="price-row"><span class="price-row-label">Event transfer</span><span class="price-row-val">from $150</span></div>
-        <div class="price-row"><span class="price-row-label">Wedding package</span><span class="price-row-val">from $250</span></div>
-        <div class="price-row"><span class="price-row-label">Stretch Limo (10)</span><span class="price-row-val">from $300</span></div>
-      </div>
-    </div>
-    <div class="price-card">
-      <div class="price-cat">Corporate</div>
-      <div class="price-svc">Business Travel</div>
-      <div class="price-desc">Dedicated corporate accounts with monthly invoicing. Volume rates for regular travel.</div>
-      <div class="price-amount"><span class="price-from">From</span><span class="price-num">$75</span><span class="price-unit">/ trip</span></div>
-      <div class="price-rows">
-        <div class="price-row"><span class="price-row-label">Point-to-point</span><span class="price-row-val">from $75</span></div>
-        <div class="price-row"><span class="price-row-label">Hourly executive</span><span class="price-row-val">from $85/hr</span></div>
-        <div class="price-row"><span class="price-row-label">Monthly billing</span><span class="price-row-val">Available</span></div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Zone C — Bush (IAH) or Hobby (HOU)</div><div class="prow-meta">46 – 60 minutes</div></div>
+        <div class="prow-price">$120<small>per trip</small></div>
       </div>
     </div>
   </div>
+
+  <!-- HOURLY -->
+  <div class="price-group reveal">
+    <div class="pg-head">
+      <div class="pg-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Hourly Chauffeur <em style="font-style:italic;color:var(--gold);font-size:18px">(4-hour minimum)</em></h3>
+      <div class="pg-rule"></div>
+    </div>
+    <div class="pg-grid cols-2">
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Hourly Rate — 1 to 6 people</div><div class="prow-meta">Per hour · 4 hr minimum</div></div>
+        <div class="prow-price">$65<small>per hour</small></div>
+      </div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Hourly Rate — 1 to 13 people</div><div class="prow-meta">Per hour · 4 hr minimum</div></div>
+        <div class="prow-price">$110<small>per hour</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LARGE GROUP -->
+  <div class="price-group reveal">
+    <div class="pg-head">
+      <div class="pg-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h3>Large Group <em style="font-style:italic;color:var(--gold);font-size:18px">(1–13 people)</em></h3>
+      <div class="pg-rule"></div>
+    </div>
+    <div class="pg-grid cols-2">
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Large Group — Per Trip (drop-off or pickup)</div><div class="prow-meta">1 to 13 people</div></div>
+        <div class="prow-price">$350<small>per trip</small></div>
+      </div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Large Group to Airports (60 min or less)</div><div class="prow-meta">1 to 13 people</div></div>
+        <div class="prow-price">$250<small>per trip</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL / NON-AIRPORT -->
+  <div class="price-group reveal">
+    <div class="pg-head">
+      <div class="pg-ico"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <h3>Special &amp; Non-Airport Trips</h3>
+      <div class="pg-rule"></div>
+    </div>
+    <div class="pg-grid cols-3">
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Private Airports / FBO</div><div class="prow-meta">Per hour</div></div>
+        <div class="prow-price">$105<small>per hour</small></div>
+      </div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Special Trips (1 to 6 people)</div><div class="prow-meta">Round trip</div></div>
+        <div class="prow-price">$300<small>per trip</small></div>
+      </div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Special — Pickup or Drop-off Only</div><div class="prow-meta">One way</div></div>
+        <div class="prow-price">$200<small>per trip</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALVESTON -->
+  <div class="price-group reveal">
+    <div class="pg-head">
+      <div class="pg-ico"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <h3>Galveston Shuttle</h3>
+      <div class="pg-rule"></div>
+    </div>
+    <div class="pg-grid cols-2">
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Galveston Shuttle — to/from cruise terminal</div><div class="prow-meta">Each person · each way</div></div>
+        <div class="prow-price">$35<small>per person</small></div>
+      </div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Private Galveston Transfer</div><div class="prow-meta">Call for group rate</div></div>
+        <div class="prow-price" style="font-size:18px;color:var(--gold2)">Call<small>for quote</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUT OF TOWN -->
+  <div class="price-group reveal">
+    <div class="pg-head">
+      <div class="pg-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <h3>Going Out of Town</h3>
+      <div class="pg-rule"></div>
+    </div>
+    <div class="pg-grid cols-2">
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Out of Houston — Per Day</div><div class="prow-meta">Full-day private driver</div></div>
+        <div class="prow-price">$1,000<small>per day</small></div>
+      </div>
+      <div class="prow">
+        <div class="prow-left"><div class="prow-name">Out of Texas — Per Day</div><div class="prow-meta">Full-day private driver</div></div>
+        <div class="prow-price">$1,500<small>per day</small></div>
+      </div>
+    </div>
+  </div>
+
   <div class="price-note reveal">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-    <div class="price-note-text">All prices are <strong>starting rates</strong> and may vary based on exact distance, time of day, vehicle availability, and special requests. <strong>Your exact quote is confirmed when you book</strong> — with no hidden fees, fuel surcharges, or surge pricing. We accept all major credit &amp; debit cards, Cash, Venmo, Zelle, and Cash App. For a custom quote, <a href="tel:+13466299969" style="color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(200,150,74,.3)">call +1 (346) 629-9969</a>.</div>
+    <div class="price-note-text">All rates are <strong>flat fees</strong> — airport pricing is by drive-time zone, hourly service has a <strong>4-hour minimum</strong>, and out-of-town trips are billed per day. <strong>No hidden fees, no surge pricing, ever.</strong> We accept all major credit &amp; debit cards, Cash, Venmo, Zelle, and Cash App. Your exact quote is confirmed when you book — for questions, <a href="tel:+13466299969" style="color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(200,150,74,.3)">call +1 (346) 629-9969</a>.</div>
   </div>
 </section>
 
