@@ -31,6 +31,8 @@ body{font-family:'Instrument Sans',system-ui,sans-serif;color:var(--ink);backgro
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .serif{font-family:'Fraunces',Georgia,serif}
+/* Disable decorative ligatures on display serif so "ff"/"ffi" render as normal letters */
+.serif,.h2,.brand-name,.hero h1,.bookcard h3,.step h4,.svc-body h4,.feat h4,.pgroup-h h3,.prow .pprice,.ctaband h2,.hero-trust .tn{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0,"dlig" 0,"calt" 0;-webkit-font-feature-settings:"liga" 0,"clig" 0,"dlig" 0,"calt" 0}
 
 /* ── UTILITIES ── */
 .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
@@ -249,6 +251,7 @@ img{display:block;max-width:100%}
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
   .hero .wrap{grid-template-columns:1fr;gap:44px}
+  .hero-photo::after{background:linear-gradient(180deg,rgba(12,20,28,.86) 0%,rgba(12,20,28,.7) 45%,rgba(12,20,28,.8) 100%)}
   .bookcard{max-width:520px}
   .steps{grid-template-columns:repeat(2,1fr);gap:32px}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -260,6 +263,8 @@ img{display:block;max-width:100%}
 }
 @media(max-width:680px){
   .wrap{padding:0 20px}
+  .hero-photo{background-position:center center}
+  .hero-photo::after{background:linear-gradient(180deg,rgba(12,20,28,.9) 0%,rgba(12,20,28,.78) 50%,rgba(12,20,28,.82) 100%)}
   .topbar-l span:last-child{display:none}
   .nav-links{display:none}
   .nav-tel{display:none}
@@ -338,6 +343,7 @@ img{display:block;max-width:100%}
           <div class="bc-field"><label>Name</label><input type="text" name="name" placeholder="Full name" required></div>
           <div class="bc-field"><label>Phone</label><input type="tel" name="phone" placeholder="+1 (346) ..." required></div>
         </div>
+        <div class="bc-field"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required></div>
         <div class="bc-field"><label>Pickup</label><input type="text" name="pickup" placeholder="Address, terminal or hotel" required></div>
         <div class="bc-field"><label>Destination</label><input type="text" name="destination" placeholder="Address, terminal or hotel" required></div>
         <div class="bc-row">
