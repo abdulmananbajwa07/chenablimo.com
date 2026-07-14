@@ -8,6 +8,8 @@
 <meta name="description" content="Premium chauffeur and limo service in Houston, TX. Airport transfers to IAH & HOU, corporate travel, weddings, events, Galveston cruises. Book online or call +1 (346) 629-9969.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.geoapify.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.geoapify.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LimousineService","name":"Chenab Limo Service","description":"Premium chauffeur and limousine service in Houston, TX.","url":"https://chenablimo.com","telephone":"+1-346-629-9969","email":"bookings@chenablimo.com","areaServed":[{"@type":"City","name":"Houston"},{"@type":"City","name":"Galveston"},{"@type":"City","name":"Sugar Land"},{"@type":"City","name":"Katy"},{"@type":"City","name":"The Woodlands"}],"address":{"@type":"PostalAddress","addressLocality":"Houston","addressRegion":"TX","addressCountry":"US"},"priceRange":"$$","paymentAccepted":"Cash, Credit Card, Venmo, Zelle, Cash App"}
@@ -604,10 +606,12 @@ const GEO_KEY='e19f062affd4459aabab0b946301a33b';
 const HOU={lat:29.7604,lon:-95.3698};
 const PIN='<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 
+const ACACHE=new Map(); // shared query cache — repeat lookups are instant
+
 function initAC(inputId,listId){
   const inp=document.getElementById(inputId), list=document.getElementById(listId);
   if(!inp||!list) return;
-  let t=null, items=[], idx=-1, lastQ='';
+  let t=null, items=[], idx=-1, lastQ='', ctrl=null;
 
   function close(){ list.classList.remove('open'); list.innerHTML=''; items=[]; idx=-1; }
 
@@ -636,24 +640,35 @@ function initAC(inputId,listId){
   }
 
   function search(q){
-    // Houston-area bias + 150km filter; fails silently so the field still works as plain text
+    const key=q.toLowerCase();
+    // 1) instant: serve from cache if we've seen this query
+    if(ACACHE.has(key)){ if(inp.value.trim()===q) render(ACACHE.get(key)); return; }
+    // 2) cancel any in-flight request so a slow old one can't overwrite a newer one
+    if(ctrl) ctrl.abort();
+    ctrl=new AbortController();
     const url='https://api.geoapify.com/v1/geocode/autocomplete'
       +'?text='+encodeURIComponent(q)
       +'&filter=circle:'+HOU.lon+','+HOU.lat+',150000'
       +'&bias=proximity:'+HOU.lon+','+HOU.lat
       +'&format=geojson&limit=5&lang=en&apiKey='+GEO_KEY;
-    fetch(url).then(r=>r.ok?r.json():Promise.reject())
-      .then(d=>{ if(inp.value.trim()===q) render(d.features||[]); })
-      .catch(()=>close()); // graceful fallback: no dropdown, plain typing still works
+    fetch(url,{signal:ctrl.signal}).then(r=>r.ok?r.json():Promise.reject())
+      .then(d=>{
+        const feats=d.features||[];
+        ACACHE.set(key,feats);
+        if(inp.value.trim()===q) render(feats);
+      })
+      .catch(e=>{ if(e.name!=='AbortError') close(); }); // graceful fallback: plain typing still works
   }
 
   inp.addEventListener('input',()=>{
     const q=inp.value.trim();
     clearTimeout(t);
-    if(q.length<3){ close(); return; }
+    if(q.length<2){ close(); return; }
     if(q===lastQ) return;
     lastQ=q;
-    t=setTimeout(()=>search(q),280); // debounce to limit API calls
+    // cached results render instantly with no delay
+    if(ACACHE.has(q.toLowerCase())){ render(ACACHE.get(q.toLowerCase())); return; }
+    t=setTimeout(()=>search(q),130); // tighter debounce = snappier
   });
 
   inp.addEventListener('keydown',e=>{
