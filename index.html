@@ -491,9 +491,9 @@ img{display:block;max-width:100%}
   </div>
 
   <div class="pgroup reveal">
-    <div class="pgroup-h"><h3>Hourly Chauffeur <em>(4-hour minimum)</em></h3><div class="rule"></div></div>
+    <div class="pgroup-h"><h3>Hourly Chauffeur <em>(3-hour minimum)</em></h3><div class="rule"></div></div>
     <div class="prow-grid c1">
-      <div class="prow"><div><div class="pname">Hourly Rate — 1 to 6 people</div><div class="pmeta">Per hour · 4 hr minimum</div></div><div class="pprice">$75<small>per hour</small></div></div>
+      <div class="prow"><div><div class="pname">Hourly Rate — 1 to 6 people</div><div class="pmeta">Per hour · 3 hr minimum</div></div><div class="pprice">$90<small>per hour</small></div></div>
     </div>
   </div>
 
@@ -508,7 +508,7 @@ img{display:block;max-width:100%}
 
   <div class="pnote reveal">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-    <p>All rates are <strong>flat fees</strong> — airport pricing is by drive-time zone, hourly service has a <strong>4-hour minimum</strong>. No hidden fees or surge pricing. We accept all major cards, Cash, Venmo, Zelle and Cash App. For your exact quote, <a href="tel:+13466299969">call +1 (346) 629-9969</a>.</p>
+    <p>All rates are <strong>flat fees</strong> — airport pricing is by drive-time zone, hourly service has a <strong>3-hour minimum</strong>. No hidden fees or surge pricing. We accept all major cards, Cash, Venmo, Zelle and Cash App. For your exact quote, <a href="tel:+13466299969">call +1 (346) 629-9969</a>.</p>
   </div>
 </div></section>
 
@@ -648,7 +648,7 @@ function initAC(inputId,listId){
     ctrl=new AbortController();
     const url='https://api.geoapify.com/v1/geocode/autocomplete'
       +'?text='+encodeURIComponent(q)
-      +'&filter=circle:'+HOU.lon+','+HOU.lat+',150000'
+      +'&filter=countrycode:us'
       +'&bias=proximity:'+HOU.lon+','+HOU.lat
       +'&format=geojson&limit=5&lang=en&apiKey='+GEO_KEY;
     fetch(url,{signal:ctrl.signal}).then(r=>r.ok?r.json():Promise.reject())
